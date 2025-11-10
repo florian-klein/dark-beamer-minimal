@@ -2,6 +2,10 @@
 
 A clean, dark-themed LaTeX beamer presentation template with a left sidebar navigation. Perfect for academic talks, conference presentations, or any professional slide deck.
 
+| <img width="400" alt="image" src="https://github.com/user-attachments/assets/b2ddbe9a-2a0e-477c-843a-f72011bf246f" /> | <img width="400" alt="image" src="https://github.com/user-attachments/assets/4cbc5f88-93cf-467e-b6aa-54867e9a13e2" /> |
+|---|---|
+| <img width="400" alt="image" src="https://github.com/user-attachments/assets/31f935d8-e758-4e62-951e-108e2e5900cf" /> | <img width="400" alt="image" src="https://github.com/user-attachments/assets/a9e22127-d289-4853-8a97-6ad6b9ec4647" /> |
+
 ## Features
 
 - **Dark theme**: Black background with white text for reduced eye strain
