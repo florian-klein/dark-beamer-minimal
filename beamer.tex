@@ -1,0 +1,375 @@
+\documentclass[10pt,aspectratio=169]{beamer}
+
+% ----------------------- Packages -----------------------
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\pgfplotsset{compat=1.18}
+\usepackage{multicol}
+\usepackage{subfigure}
+\usepackage{listings}
+\usepackage[UKenglish]{isodate}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,shapes.geometric,calc,fillbetween}
+
+\cleanlookdateon
+
+% ----------------------- Listings Configuration -----------------------
+\lstset{
+  basicstyle=\ttfamily\small\color{white},
+  backgroundcolor=\color{black!80},
+  keywordstyle=\color{cyan!80}\bfseries,
+  commentstyle=\color{white!60}\itshape,
+  stringstyle=\color{green!60},
+  numberstyle=\tiny\color{white!40},
+  numbers=left,
+  numbersep=8pt,
+  frame=single,
+  rulecolor=\color{white!30},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=2,
+  showstringspaces=false
+}
+
+% ----------------------- Theme & Colors -----------------------
+\usetheme{Madrid}
+\usecolortheme{owl}   % make sure you have the beamer-owl theme installed
+
+% Dark background + white text
+\setbeamercolor{background canvas}{bg=black}
+\setbeamercolor{normal text}{fg=white}
+\setbeamercolor{frametitle}{fg=white,bg=black}
+\setbeamercolor{title}{fg=white}
+\setbeamercolor{author}{fg=white}
+\setbeamercolor{institute}{fg=white}
+\setbeamercolor{date}{fg=white}
+
+% ----------------------- Metadata -----------------------
+\title[Short Title]{Main Talk Title Goes Here}
+\author{Presenter Name}
+\institute{Your Institution}
+\date{\today} % or a fixed date
+
+% ----------------------- Left Sidebar Progress Rail -----------------------
+\useoutertheme[left,width=18mm]{sidebar}
+
+% Fonts in the rail
+\setbeamerfont{title in sidebar}{size=\tiny}
+\setbeamerfont{author in sidebar}{size=\tiny}
+\setbeamerfont{section in sidebar}{size=\scriptsize}
+\setbeamerfont{subsection in sidebar}{size=\tiny}
+
+% Colors in the rail
+\setbeamercolor{sidebar}{bg=black, fg=white}
+\setbeamercolor{title in sidebar}{fg=white}
+\setbeamercolor{section in sidebar}{fg=white,bg=black}
+\setbeamercolor{section in sidebar shaded}{fg=white!40,bg=black}
+\setbeamercolor{subsection in sidebar}{fg=white}
+\setbeamercolor{subsection in sidebar shaded}{fg=white!35}
+\setbeamercolor{section in sidebar current}{fg=black,bg=cyan!60}
+\setbeamercolor{subsection in sidebar current}{fg=black,bg=cyan!60}
+
+\makeatletter
+\setbeamertemplate{sidebar canvas left}{%
+  \color{black}\vrule width\beamer@sidebarwidth height\paperheight
+}
+
+\setbeamertemplate{sidebar left}{%
+  \vskip13ex%
+  \hbox to \beamer@sidebarwidth{%
+    \hfil%
+    \vbox to\paperheight{%
+      \begin{minipage}[t]{\beamer@sidebarwidth}%
+        \vspace*{1ex}
+        \raggedright
+        \insertverticalnavigation{\paperheight}% sections/subsections
+        \vfill
+      \end{minipage}%
+    }%
+    \hfil%
+  }%
+}
+\makeatother
+
+% Remove default headline
+\setbeamertemplate{headline}{}
+
+% Custom frametitle bar across full width
+\setbeamertemplate{frametitle}{%
+  \vskip0.5ex
+  \begin{beamercolorbox}[wd=\paperwidth,ht=2.8ex,dp=1ex,leftskip=1em]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle
+  \end{beamercolorbox}
+}
+\setbeamercolor{frametitle}{fg=white,bg=black}
+
+% ----------------------- Document -----------------------
+\begin{document}
+
+% ----------------------- Title frame (shifted to center, ignoring sidebar) -----------------------
+\begin{frame}[plain]
+  \begingroup
+    % shift content left by the known sidebar width you set: width=18mm
+    \hspace*{-25mm}%
+    \begin{minipage}{\paperwidth}
+      \centering
+      \titlepage
+    \end{minipage}
+  \endgroup
+\end{frame}
+
+% =======================================================
+% SECTION 1: INTRODUCTION
+% =======================================================
+\section{Introduction}
+
+\subsection{Motivation}
+% ---------- Simple bullet slide ----------
+\begin{frame}{Motivation}
+  \begin{itemize}
+    \item Capture the audience's attention, since this is all you need \cite{vaswani2023attentionneed}.
+    \item Citations are supported as seen in the line above.
+    \item Briefly explain why this topic matters.
+    \item State the real-world problem or use case.
+    \item Optionally mention who might benefit from your results.
+  \end{itemize}
+\end{frame}
+
+
+% ---------- Example: Figure slide ----------
+\subsection{Figure}
+\begin{frame}{Figure}
+  \begin{figure}
+    \centering
+    % Replace `example-image` with your own image file
+    \includegraphics[width=0.5\textwidth]{example-image}
+    \caption{Short descriptive caption of your figure.}
+  \end{figure}
+\end{frame}
+
+% =======================================================
+% SECTION 2: BACKGROUND / THEORY
+% =======================================================
+\section{Background}
+
+\subsection{Key Concepts}
+% ---------- Example: Two-column slide ----------
+\begin{frame}{Key Concepts}
+  \begin{columns}[T,totalwidth=\textwidth]
+    \begin{column}{0.48\textwidth}
+      \textbf{Concept A}
+      \begin{itemize}
+        \item Short definition.
+        \item Why it is important.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Concept B}
+      \begin{itemize}
+        \item Short definition.
+        \item Relation to Concept A.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% ---------- Example: Simple TikZ diagram ----------
+\begin{frame}{Example TikZ Diagram}
+  \centering
+  \begin{tikzpicture}[
+    >=Stealth,
+    node distance=2cm,
+    box/.style={rectangle, rounded corners, draw=white, thick,
+                fill=black!55, minimum width=2.6cm,
+                minimum height=0.9cm, text=white, align=center},
+    arrow/.style={->, thick, white}
+  ]
+    \node[box] (input)  {Input};
+    \node[box, right=of input] (process) {Process};
+    \node[box, right=of process] (output) {Output};
+
+    \draw[arrow] (input) -- (process);
+    \draw[arrow] (process) -- (output);
+  \end{tikzpicture}
+
+  \vspace{1em}
+  \begin{itemize}
+    \item Use boxes and arrows to show the logical flow.
+    \item Replace labels with your actual pipeline stages.
+  \end{itemize}
+\end{frame}
+
+% ---------- Example: Code listing ----------
+\subsection{Code Example}
+\begin{frame}[fragile]{Code Listing Example}
+  \begin{lstlisting}[language=Python, basicstyle=\ttfamily\footnotesize\color{white}]
+    def fibonacci(n):
+        """Calculate the nth Fibonacci number."""
+        if n <= 1:
+            return n
+        else:
+            return fibonacci(n-1) + fibonacci(n-2)
+
+    # Example usage
+    result = fibonacci(10)
+    print(f"The 10th Fibonacci number is {result}")
+  \end{lstlisting}
+  \vspace{0.5em}
+  \small{Replace with your own code. Supports many languages: Python, Java, C++, etc.}
+\end{frame}
+
+% ---------- Example: Block environments ----------
+\subsection{Block Environments}
+\begin{frame}{Block Environments}
+  \begin{block}{Standard Block}
+    Use blocks to highlight important information or definitions.
+  \end{block}
+
+  \vspace{0.3em}
+
+  \begin{alertblock}{Alert Block}
+    Use alert blocks for warnings, cautions, or critical points.
+  \end{alertblock}
+
+  \vspace{0.3em}
+
+  \begin{exampleblock}{Example Block}
+    Use example blocks to show concrete examples or use cases.
+  \end{exampleblock}
+
+  \vspace{0.5em}
+  \small{These colored blocks help organize and emphasize content.}
+\end{frame}
+
+% =======================================================
+% SECTION 3: METHOD / EXPERIMENTS
+% =======================================================
+\section{Methodology}
+
+\subsection{Overview}
+% ---------- Example: Method bullet slide ----------
+\begin{frame}{Method Overview}
+  \begin{enumerate}
+    \item \textbf{Data / Setting:} Describe the dataset or experimental setup.
+    \item \textbf{Model / Algorithm:} Summarize what you apply.
+    \item \textbf{Metrics:} Specify how you evaluate performance.
+  \end{enumerate}
+\end{frame}
+
+\subsection{Some Plot}
+% ---------- Example: PGFPlots chart ----------
+\begin{frame}{Example PGFPlots Chart}
+  % Small dummy table inline
+  \pgfplotstableread[row sep=\\,col sep=&]{
+  x   & y   \\
+  1   & 2   \\
+  2   & 3.5 \\
+  3   & 3.2 \\
+  4   & 4.8 \\
+  }\datatable
+
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.9\textwidth,
+      height=0.45\textheight,
+      xlabel={X axis label},
+      ylabel={Y axis label},
+      axis line style={white},
+      tick align=inside,
+      tick style={white},
+      xticklabel style={text=white},
+      yticklabel style={text=white},
+      grid=major,
+      grid style={white!20},
+      label style={text=white}
+    ]
+      \addplot+[mark=o, thick] table[x=x,y=y]{\datatable};
+    \end{axis}
+  \end{tikzpicture}
+
+  \vspace{0.5em}
+  \small{Replace the data table and labels with your own results.}
+\end{frame}
+
+% =======================================================
+% SECTION 4: RESULTS & DISCUSSION
+% =======================================================
+\section{Results}
+
+\subsection{Key Findings}
+% ---------- Example: Result bullets ----------
+\begin{frame}{Key Results}
+  \begin{itemize}
+    \item \textbf{Result 1:} Short statement of the main finding.
+    \item \textbf{Result 2:} Compare against baseline or prior work.
+    \item \textbf{Result 3:} Mention surprising or counterintuitive observations.
+  \end{itemize}
+\end{frame}
+
+% ---------- Example: Results table ----------
+\subsection{Comparison Table}
+\begin{frame}{Performance Comparison}
+  \begin{table}
+    \centering
+    \begin{tabular}{lccc}
+      \hline
+      \textbf{Method} & \textbf{Accuracy} & \textbf{Time (s)} & \textbf{Memory (MB)} \\
+      \hline
+      Baseline        & 85.3\%            & 12.5              & 256 \\
+      Method A        & 89.7\%            & 10.2              & 312 \\
+      Method B        & 92.1\%            & 15.8              & 289 \\
+      \textbf{Ours}   & \textbf{94.5\%}   & \textbf{9.8}      & \textbf{278} \\
+      \hline
+    \end{tabular}
+    \caption{Quantitative comparison of different methods.}
+  \end{table}
+
+  \vspace{0.5em}
+  \small{Our method achieves the best accuracy with competitive speed and memory usage.}
+\end{frame}
+
+\section{Discussion}
+
+\begin{frame}{Discussion}
+  \begin{itemize}
+    \item Interpret what the results mean.
+    \item Limitations of your approach or dataset.
+    \item Possible future directions or open questions.
+  \end{itemize}
+\end{frame}
+
+% =======================================================
+% SECTION 5: CONCLUSION
+% =======================================================
+\section{Conclusion}
+
+\begin{frame}{Conclusion}
+  \begin{itemize}
+    \item Summarize the core message of the talk in 2–3 bullets.
+    \item Highlight the main contribution or takeaway.
+    \item Optionally include a call to action or next steps.
+  \end{itemize}
+\end{frame}
+
+% ---------- Thank you / Questions ----------
+\begin{frame}
+  \centering
+  \Large Thank you for your attention!\\[1em]
+  \large Questions?
+\end{frame}
+
+% =======================================================
+% REFERENCES (optional – uncomment if you use BibTeX)
+% =======================================================
+\section{References}
+\begin{frame}[allowframebreaks]{References}
+  \bibliographystyle{splncs04}
+  % add your .bib file here
+  \bibliography{lit}
+\end{frame}
+
+\end{document}
