@@ -177,3 +177,4 @@ This template is provided as-is for free use. Modify as needed for your presenta
 
 - Based on the Beamer Madrid theme
 - Uses the owl color theme by Ross Churchley
+- Claude for this README 
